@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Earnings Dashboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    /* Deep blue/purple gradient from the image */
+    background: linear-gradient(to bottom, #1A2A4E, #0A1C3C); /* Adjusted based on image */
+    height: 100vh; /* Use 100vh for full viewport height */
+    margin: 0;
+    color: #fff;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .header-container {
+    width: 95%;
+    max-width: 600px;
+    display: flex;
+    justify-content: flex-end; /* Push menu to the right */
+    align-items: center;
+    margin-bottom: 20px; /* Space between header and dashboard boxes */
+    /* Background for the top bar - similar to bottom nav or main background */
+    background-color: #1A2A4E; /* Matching the top of the gradient or slightly darker */
+    padding: 10px 0; /* Add padding for visual spacing */
+    border-radius: 10px; /* Slightly rounded corners for the header bar */
+  }
+
+  .menu-section {
+    background-color: transparent; /* Menu icon background is transparent in image */
+    border-radius: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-section:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight hover effect */
+  }
+
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Space between bars */
+    width: 24px;
+    height: 20px; /* Adjust height based on gap and bar height */
+  }
+
+  .menu-icon div {
+    width: 100%;
+    height: 3px; /* Thickness of each bar */
+    background-color: white;
+    border-radius: 2px;
+  }
+
+  .dashboard-container {
+    width: 95%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px; /* Add margin to separate from the dark mode toggle */
+  }
+  .dashboard-box {
+    /* Translucent background based on image */
+    background-color: rgba(60, 80, 120, 0.5); /* Adjusted blue with opacity */
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for contrast */
+  }
+  .dashboard-box h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #fff;
+  }
+  .dashboard-box p {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+  }
+  .action-button {
+    background-color: #64B5F6; /* Light blue from image (Aviator/Apply) */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .action-button:hover {
+    background-color: #42A5F5; /* Slightly darker blue on hover */
+  }
+  .claim-button {
+    background-color: #8E24AA; /* Purple from the image for CLAIM button */
+  }
+  .claim-button:hover {
+    background-color: #7B1FA2; /* Slightly darker purple on hover */
+  }
+  .dark-mode-toggle {
+    background-color: rgba(60, 80, 120, 0.5); /* Same as dashboard boxes */
+    border-radius: 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 95%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    margin-bottom: 90px;
+    color: #fff;
+  }
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: #64B5F6; /* Light blue when active */
+  }
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+
+  /* Bottom navigation */
+  .bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0A1C3C; /* Dark blue from the bottom of the gradient */
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4); /* Darker shadow */
+    z-index: 1000;
+  }
+  .bottom-navigation a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 5px 0;
+    transition: background-color 0.3s ease;
+  }
+  .bottom-navigation a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+  }
+  .bottom-navigation a.active {
+    color: #64B5F6; /* Highlight active link with the light blue */
+  }
+  .bottom-navigation a span {
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  .bottom-navigation svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  /* Dark mode specific styles for dashboard boxes */
+  body.dark-mode .dashboard-box {
+    background-color: rgba(60, 80, 120, 0.5); /* Consistent with the light mode for this design */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Styles for the off-canvas menu */
+  .off-canvas-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 250px;
+    height: 100%;
+    background-color: #0A1C3C; /* Dark blue, matching bottom nav */
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease-in-out;
+    z-index: 1100;
+    padding-top: 60px;
+    color: white;
+  }
+
+  .off-canvas-menu.open {
+    right: 0;
+  }
+
+  .off-canvas-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .off-canvas-menu ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+  }
+
+  .off-canvas-menu ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .off-canvas-menu .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+  }
+</style>
+</head>
+<body>
+  <div class="header-container">
+    <div class="menu-section" id="menuButton">
+      <div class="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="dashboard-box">
+      <h2>WhatsApp Earnings</h2>
+      <p>0 KES</p>
+      <button class="action-button">whatsapp</button>
+    </div>
+    <div class="dashboard-box">
+      <h2>Current Package</h2>
+      <p>NONE</p>
+    </div>
+    <div class="dashboard-box">
+      <h2>Loans</h2>
+      <p>0 KES</p>
+      <button class="action-button">APPLY</button>
+    </div>
+    <div class="dashboard-box">
+      <h2>Deposit Balance</h2>
+      <p>0 KES</p>
+    </div>
+    <div class="dashboard-box">
+      <h2>Total Withdrawal</h2>
+      <p>0 KES</p>
+    </div>
+    <div class="dashboard-box">
+      <h2>Cashback Bonus</h2>
+      <p>0 KES</p>
+      <button class="action-button claim-button">CLAIM</button>
+    </div>
+  </div>
+
+  <div class="dark-mode-toggle">
+    <span>Activate Dark Mode</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="darkModeCheckbox">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="bottom-navigation">
+    <a href="#" class="nav-link active" data-name="home">
+      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+      <span>Home</span>
+    </a>
+    <a href="#" class="nav-link" data-name="deposit">
+      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
+      <span>Deposit</span>
+    </a>
+    <a href="#" class="nav-link" data-name="invest">
+      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+      <span>Invest</span>
+    </a>
+    <a href="#" class="nav-link" data-name="profile">
+      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+      <span>Profile</span>
+    </a>
+  </div>
+
+  <div class="off-canvas-menu" id="offCanvasMenu">
+    <span class="close-btn" id="closeMenuBtn">&times;</span>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">My Earnings</a></li>
+      <li><a href="#">Packages</a></li>
+      <li><a href="#">Withdrawal</a></li>
+      <li><a href="#">Support</a></li><li><a href="#">Today's Advert</a></li>
+      <li><li><a href="#">upload screenshot </a></li>
+      <li>         
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </div>
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const darkModeCheckbox = document.getElementById('darkModeCheckbox');
+    const body = document.body;
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuButton = document.getElementById('menuButton');
+    const offCanvasMenu = document.getElementById('offCanvasMenu');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+    function setDarkMode(isDark) {
+      if (isDark) {
+        body.classList.add('dark-mode');
+        // Dark mode background: Deeper gradient to make elements pop
+        body.style.background = 'linear-gradient(to bottom, #0A1C3C, #050F1D)'; /* Even darker for dark mode */
+      } else {
+        body.classList.remove('dark-mode');
+        // Original (image-based) background
+        body.style.background = 'linear-gradient(to bottom, #1A2A4E, #0A1C3C)';
+      }
+    }
+
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'enabled') {
+      darkModeCheckbox.checked = true;
+      setDarkMode(true);
+    }
+
+    darkModeCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        setDarkMode(true);
+        localStorage.setItem('darkMode', 'enabled');
+        console.log('Dark mode activated');
+      } else {
+        setDarkMode(false);
+        localStorage.setItem('darkMode', 'disabled');
+        console.log('Dark mode deactivated');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        navLinks.forEach(nav => nav.classList.remove('active'));
+        this.classList.add('active');
+        const sectionName = this.dataset.name;
+        console.log(`${sectionName} section clicked`);
+      });
+    });
+
+    menuButton.addEventListener('click', function() {
+      offCanvasMenu.classList.add('open');
+      console.log('Menu opened');
+    });
+
+    closeMenuBtn.addEventListener('click', function() {
+      offCanvasMenu.classList.remove('open');
+      console.log('Menu closed');
+    });
+
+    document.body.addEventListener('click', function(event) {
+      if (!offCanvasMenu.contains(event.target) && !menuButton.contains(event.target) && offCanvasMenu.classList.contains('open')) {
+        offCanvasMenu.classList.remove('open');
+        console.log('Menu closed by clicking outside');
+      }
+    });
+  });
+</script><script>
+  document.querySelector('.nav-link[data-name="deposit"]').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = 'mpesa-payment.html';
+  });
+</script>
+</body>
+</html>

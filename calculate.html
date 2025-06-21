@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>View Calculator</title>
+<style>
+body {
+    font-family: sans-serif;
+    background-image: linear-gradient(to bottom right, #800080, #0000FF); /* Mixed purple-blue gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important for width */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+.notification {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>View Calculator</h1>
+    <input type="number" id="views" placeholder="Enter views">
+    <button id="calculateButton">Calculate</button>
+    <div class="notification" id="notification"></div>
+</div>
+
+<script>
+document.getElementById('calculateButton').addEventListener('click', function() {
+    const views = parseInt(document.getElementById('views').value);
+
+    if (isNaN(views) || views < 1) {
+        alert('Please enter a valid number of views.');
+        return;
+    }
+
+    const earned = views * 100;
+    const notificationText = `Your views have been submitted successfully🎉! You earned ${earned} ksh.`;
+    const notificationElement = document.getElementById('notification');
+    notificationElement.textContent = notificationText;
+    notificationElement.style.display = 'block'; // Show the notification
+
+    // Hide the notification after 8 seconds (8000 milliseconds)
+    setTimeout(function() {
+        notificationElement.style.display = 'none';
+    }, 8000);
+});
+</script>
+
+</body>
+</html>
