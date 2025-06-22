@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Download</title>
+    <style>
+        body {
+            background-color: #1A2942; /* Approximate dark blue from your image */
+            color: white; /* Make text visible on dark background */
+            font-family: sans-serif; /* Optional: improve text appearance */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh; /* Ensure content fills the viewport */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        img {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px; /* Optional: rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <h1>This is an image</h1>
+    <img src="image.jpeg" width="300px" height="300px" alt="Image">
+    <br>
+    <a href="image.jpeg" download>
+        <button>Download Image</button>
+    </a>
+</body>
+</html>
