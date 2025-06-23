@@ -1,134 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Earnings Dashboard</title>
+<title>Prestige Motors Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   body {
     font-family: Arial, sans-serif;
     /* Deep blue/purple gradient from the image */
-    background: linear-gradient(to bottom, #1A2A4E, #0A1C3C); /* Adjusted based on image */
-    height: 100vh; /* Use 100vh for full viewport height */
+    background: linear-gradient(to bottom, #1A2A4E, #0A1C3C);
+    min-height: 100vh; /* Use min-height to allow content to extend beyond viewport height */
     margin: 0;
     color: #fff;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px 120px 20px; /* Even more overall padding */
     box-sizing: border-box;
   }
 
-  .header-container {
-    width: 95%;
-    max-width: 600px;
+  /* New Header Styling for Prestige Motors Logo and Text */
+  .prestige-header {
+    width: 90%; /* Slightly narrower percentage to ensure more side padding */
+    max-width: 1400px; /* Drastically INCREASED MAX-WIDTH for a much, much wider layout */
     display: flex;
-    justify-content: flex-end; /* Push menu to the right */
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px; /* Space between header and dashboard boxes */
-    /* Background for the top bar - similar to bottom nav or main background */
-    background-color: #1A2A4E; /* Matching the top of the gradient or slightly darker */
-    padding: 10px 0; /* Add padding for visual spacing */
-    border-radius: 10px; /* Slightly rounded corners for the header bar */
+    margin-bottom: 45px; /* More space */
+    padding: 25px 0; /* More padding */
+  }
+
+  .prestige-logo {
+    width: 280px; /* Much larger logo */
+    height: auto;
+    margin-bottom: 25px; /* More space below logo */
+  }
+
+  .prestige-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 3.5em; /* Significantly larger font size for title */
+    color: #fff;
+    letter-spacing: 5px; /* More letter spacing */
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+  }
+
+  .header-container {
+    width: 90%; /* Match prestige-header width */
+    max-width: 1400px; /* Match prestige-header max-width */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 45px; /* More space */
+    padding: 20px 0; /* More padding */
+    border-radius: 10px;
   }
 
   .menu-section {
-    background-color: transparent; /* Menu icon background is transparent in image */
-    border-radius: 20px;
-    padding: 8px 12px;
+    background-color: transparent;
+    border-radius: 30px; /* More rounded */
+    padding: 15px 22px; /* Even larger padding */
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   .menu-section:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Slight hover effect */
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .menu-icon {
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Space between bars */
-    width: 24px;
-    height: 20px; /* Adjust height based on gap and bar height */
+    gap: 7px; /* Larger gap */
+    width: 40px; /* Wider */
+    height: 35px; /* Taller */
   }
 
   .menu-icon div {
     width: 100%;
-    height: 3px; /* Thickness of each bar */
+    height: 6px; /* Thicker bars */
     background-color: white;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 
   .dashboard-container {
-    width: 95%;
-    max-width: 600px;
+    width: 90%; /* Match header width */
+    max-width: 1400px; /* Match header max-width */
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px; /* Add margin to separate from the dark mode toggle */
+    gap: 30px; /* More space between boxes */
+    margin-bottom: 50px; /* More space */
   }
   .dashboard-box {
-    /* Translucent background based on image */
-    background-color: rgba(60, 80, 120, 0.5); /* Adjusted blue with opacity */
-    border-radius: 10px;
-    padding: 15px;
+    background-color: rgba(60, 80, 120, 0.5);
+    border-radius: 25px; /* Even more rounded corners */
+    padding: 35px 40px; /* Significantly increased padding */
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for contrast */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Much stronger shadow */
   }
   .dashboard-box h2 {
     margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 1.1em;
+    margin-bottom: 12px; /* More space below heading */
+    font-size: 2em; /* Significantly increased font size for headings */
     font-weight: normal;
     color: #fff;
   }
   .dashboard-box p {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 3.2em; /* Drastically larger font size for values */
     font-weight: bold;
     color: #fff;
   }
   .action-button {
-    background-color: #64B5F6; /* Light blue from image (Aviator/Apply) */
+    background-color: #64B5F6;
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 15px 30px; /* Larger padding for buttons */
+    border-radius: 12px; /* More rounded buttons */
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.4em; /* Increased font size */
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 25px; /* More space above button */
     transition: background-color 0.3s ease;
   }
   .action-button:hover {
-    background-color: #42A5F5; /* Slightly darker blue on hover */
+    background-color: #42A5F5;
   }
   .claim-button {
-    background-color: #8E24AA; /* Purple from the image for CLAIM button */
+    background-color: #8E24AA;
   }
   .claim-button:hover {
-    background-color: #7B1FA2; /* Slightly darker purple on hover */
+    background-color: #7B1FA2;
   }
   .dark-mode-toggle {
-    background-color: rgba(60, 80, 120, 0.5); /* Same as dashboard boxes */
-    border-radius: 25px;
-    padding: 15px;
+    background-color: rgba(60, 80, 120, 0.5);
+    border-radius: 40px; /* Even more rounded */
+    padding: 30px 35px; /* Increased padding */
     box-sizing: border-box;
-    width: 95%;
-    max-width: 600px;
+    width: 90%; /* Match content width */
+    max-width: 1400px; /* Match content max-width */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
-    margin-bottom: 90px;
+    margin-bottom: 130px; /* Enough space for the fixed navigation */
     color: #fff;
+    font-size: 1.5em; /* Increased font size */
   }
   .toggle-switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 20px;
+    width: 70px; /* Larger switch */
+    height: 35px; /* Larger switch */
   }
   .toggle-switch input {
     opacity: 0;
@@ -149,19 +175,19 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
+    height: 28px; /* Larger handle */
+    width: 28px; /* Larger handle */
+    left: 3.5px; /* Centered */
+    bottom: 3.5px; /* Centered vertically */
     background-color: white;
     transition: .4s;
     border-radius: 50%;
   }
   input:checked + .slider {
-    background-color: #64B5F6; /* Light blue when active */
+    background-color: #64B5F6;
   }
   input:checked + .slider:before {
-    transform: translateX(20px);
+    transform: translateX(35px); /* Adjusted for larger switch */
   }
 
   /* Bottom navigation */
@@ -170,12 +196,12 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #0A1C3C; /* Dark blue from the bottom of the gradient */
+    background-color: #0A1C3C;
     color: white;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4); /* Darker shadow */
+    padding: 18px 0; /* Significantly more padding */
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8); /* Much stronger shadow */
     z-index: 1000;
   }
   .bottom-navigation a {
@@ -185,29 +211,29 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
-    padding: 5px 0;
+    padding: 12px 0; /* More padding */
     transition: background-color 0.3s ease;
   }
   .bottom-navigation a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    border-radius: 10px; /* More rounded hover */
   }
   .bottom-navigation a.active {
-    color: #64B5F6; /* Highlight active link with the light blue */
+    color: #64B5F6;
   }
   .bottom-navigation a span {
-    font-size: 0.8em;
-    margin-top: 5px;
+    font-size: 1.1em; /* Increased font size for nav text */
+    margin-top: 12px; /* More space above text */
   }
   .bottom-navigation svg {
-    width: 24px;
-    height: 24px;
+    width: 36px; /* Much larger icons */
+    height: 36px; /* Much larger icons */
     stroke: currentColor;
   }
 
   /* Dark mode specific styles for dashboard boxes */
   body.dark-mode .dashboard-box {
-    background-color: rgba(60, 80, 120, 0.5); /* Consistent with the light mode for this design */
+    background-color: rgba(60, 80, 120, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   }
@@ -216,14 +242,14 @@
   .off-canvas-menu {
     position: fixed;
     top: 0;
-    right: -300px;
-    width: 250px;
+    right: -380px; /* Significantly wider */
+    width: 380px;
     height: 100%;
-    background-color: #0A1C3C; /* Dark blue, matching bottom nav */
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #0A1C3C;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.7);
     transition: right 0.3s ease-in-out;
     z-index: 1100;
-    padding-top: 60px;
+    padding-top: 90px; /* More padding at top */
     color: white;
   }
 
@@ -239,11 +265,12 @@
 
   .off-canvas-menu ul li a {
     display: block;
-    padding: 15px 20px;
+    padding: 25px 35px; /* Significantly increased padding */
     color: white;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* More prominent border */
     transition: background-color 0.2s ease;
+    font-size: 1.3em; /* Increased font size */
   }
 
   .off-canvas-menu ul li a:hover {
@@ -252,15 +279,50 @@
 
   .off-canvas-menu .close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
+    top: 30px; /* Adjusted position */
+    right: 35px; /* Adjusted position */
+    font-size: 45px; /* Much larger close button */
     cursor: pointer;
     color: white;
+  }
+
+  /* Media Queries for better responsiveness */
+  @media (min-width: 768px) {
+    /* Styles for tablets and desktops */
+    body {
+      padding-left: 50px; /* More padding */
+      padding-right: 50px; /* More padding */
+    }
+
+    .prestige-logo {
+      width: 350px; /* Even larger logo on big screens */
+    }
+
+    .prestige-title {
+      font-size: 4.5em; /* Even larger title on big screens */
+    }
+
+    .dashboard-box h2 {
+      font-size: 2.2em; /* Larger on big screens */
+    }
+    .dashboard-box p {
+      font-size: 3.8em; /* Even larger values on big screens */
+    }
+    .action-button {
+      font-size: 1.6em; /* Larger buttons on big screens */
+      padding: 18px 35px; /* Larger padding for buttons on larger screens */
+    }
+    .dark-mode-toggle {
+        font-size: 1.7em; /* Larger text for dark mode toggle */
+    }
   }
 </style>
 </head>
 <body>
+  <div class="prestige-header">
+    <img src="logo.jpg" alt="Prestige Motors Logo" class="prestige-logo">
+    <h1 class="prestige-title">PRESTIGE MOTORS</h1>
+  </div>
   <div class="header-container">
     <div class="menu-section" id="menuButton">
       <div class="menu-icon">
@@ -274,8 +336,8 @@
   <div class="dashboard-container">
     <div class="dashboard-box">
       <h2>WhatsApp Earnings</h2>
-      <p>0 KES</p>
-      <button class="action-button">whatsapp</button>
+      <p id="whatsappEarningsValue">0 KES</p>
+      <button class="action-button" onclick="window.location.href='whatsapp-screenshot-upload.html'">whatsapp</button>
     </div>
     <div class="dashboard-box">
       <h2>Current Package</h2>
@@ -292,7 +354,7 @@
     </div>
     <div class="dashboard-box">
       <h2>Total Withdrawal</h2>
-      <p>0 KES</p>
+      <p id="totalWithdrawalValue">0 KES</p>
     </div>
     <div class="dashboard-box">
       <h2>Cashback Bonus</h2>
@@ -310,19 +372,18 @@
   </div>
 
   <div class="bottom-navigation">
-    <a href="#" class="nav-link active" data-name="home">
+    <a href="dashboard.html" class="nav-link active" data-name="home">
       <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
       <span>Home</span>
     </a>
-    <a href="#" class="nav-link" data-name="deposit">
+    <a href="mpesa-payment.html" class="nav-link" data-name="deposit">
       <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
       <span>Deposit</span>
     </a>
-    <a href="#" class="nav-link" data-name="invest">
-      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
-      <span>Invest</span>
+    <a href="money.html" class="nav-link" data-name="withdraw"> <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+      <span>Withdraw</span>
     </a>
-    <a href="#" class="nav-link" data-name="profile">
+    <a href="profile.html" class="nav-link" data-name="profile">
       <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
       <span>Profile</span>
     </a>
@@ -331,17 +392,17 @@
   <div class="off-canvas-menu" id="offCanvasMenu">
     <span class="close-btn" id="closeMenuBtn">&times;</span>
     <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">My Earnings</a></li>
-      <li><a href="#">Packages</a></li>
-      <li><a href="#">Withdrawal</a></li>
-      <li><a href="#">Support</a></li><li><a href="#">Today's Advert</a></li>
-      <li><li><a href="#">upload screenshot </a></li>
-      <li>         
-      <li><a href="#">Settings</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="my-earnings.html">My Earnings</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="withdrawal.html">Withdrawal</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="product.html">Today's Advert</a></li>
+      <li><a href="whatsapp-screenshot-upload.html">Upload Screenshot</a></li>
+      <li><a href="settings.html">Settings</a></li>
     </ul>
   </div>
-  
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const darkModeCheckbox = document.getElementById('darkModeCheckbox');
@@ -350,15 +411,15 @@
     const menuButton = document.getElementById('menuButton');
     const offCanvasMenu = document.getElementById('offCanvasMenu');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const whatsappEarningsValue = document.getElementById('whatsappEarningsValue');
+    const totalWithdrawalValue = document.getElementById('totalWithdrawalValue'); // New element for total withdrawal
 
     function setDarkMode(isDark) {
       if (isDark) {
         body.classList.add('dark-mode');
-        // Dark mode background: Deeper gradient to make elements pop
-        body.style.background = 'linear-gradient(to bottom, #0A1C3C, #050F1D)'; /* Even darker for dark mode */
+        body.style.background = 'linear-gradient(to bottom, #0A1C3C, #050F1D)';
       } else {
         body.classList.remove('dark-mode');
-        // Original (image-based) background
         body.style.background = 'linear-gradient(to bottom, #1A2A4E, #0A1C3C)';
       }
     }
@@ -373,45 +434,51 @@
       if (this.checked) {
         setDarkMode(true);
         localStorage.setItem('darkMode', 'enabled');
-        console.log('Dark mode activated');
       } else {
         setDarkMode(false);
         localStorage.setItem('darkMode', 'disabled');
-        console.log('Dark mode deactivated');
       }
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', function(event) {
-        event.preventDefault();
+        // No event.preventDefault() here so links navigate normally
         navLinks.forEach(nav => nav.classList.remove('active'));
         this.classList.add('active');
-        const sectionName = this.dataset.name;
-        console.log(`${sectionName} section clicked`);
+        // The browser will handle navigation because preventDefault() is removed.
       });
     });
 
     menuButton.addEventListener('click', function() {
       offCanvasMenu.classList.add('open');
-      console.log('Menu opened');
     });
 
     closeMenuBtn.addEventListener('click', function() {
       offCanvasMenu.classList.remove('open');
-      console.log('Menu closed');
     });
 
     document.body.addEventListener('click', function(event) {
       if (!offCanvasMenu.contains(event.target) && !menuButton.contains(event.target) && offCanvasMenu.classList.contains('open')) {
         offCanvasMenu.classList.remove('open');
-        console.log('Menu closed by clicking outside');
       }
     });
-  });
-</script><script>
-  document.querySelector('.nav-link[data-name="deposit"]').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'mpesa-payment.html';
+
+    // --- LOGIC FOR WHATSAPP EARNINGS ---
+    const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
+    if (storedWhatsappEarnings) {
+      whatsappEarningsValue.textContent = `${storedWhatsappEarnings} KES`;
+    }
+
+    // --- LOGIC FOR TOTAL WITHDRAWAL ---
+    const storedTotalWithdrawal = localStorage.getItem('totalWithdrawn');
+    if (storedTotalWithdrawal) {
+      totalWithdrawalValue.textContent = `${storedTotalWithdrawal} KES`;
+    }
+
+    // Direct navigation for action buttons on dashboard
+    document.querySelector('.dashboard-box .action-button').onclick = function() {
+        window.location.href = 'whatsapp-screenshot-upload.html';
+    };
   });
 </script>
 </body>
