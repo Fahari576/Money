@@ -6,7 +6,6 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    /* Deep blue/purple gradient from the image */
     background: linear-gradient(to bottom, #1A2A4E, #0A1C3C);
     min-height: 100vh;
     margin: 0;
@@ -15,53 +14,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 15px 100px 15px; /* Adjusted overall padding */
+    padding: 20px 10px 80px 10px; /* Reduced overall padding further */
     box-sizing: border-box;
   }
 
   /* Header Styling for Prestige Motors Logo and Text */
   .prestige-header {
     width: 95%;
-    max-width: 1000px; /* Reduced max-width for better presentation */
+    max-width: 900px; /* Slightly reduced max-width */
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px; /* Reduced space below header */
-    padding: 15px 0; /* Reduced padding */
+    margin-bottom: 15px; /* Significantly reduced space below header */
+    padding: 10px 0; /* Significantly reduced padding */
   }
 
   .prestige-logo {
-    width: 180px; /* Adjusted logo size */
+    width: 150px; /* Adjusted logo size */
     height: auto;
-    margin-bottom: 10px; /* Reduced space below logo */
+    margin-bottom: 5px; /* Greatly reduced space below logo */
   }
 
   .prestige-title {
     font-family: 'Times New Roman', serif;
-    font-size: 3.2em; /* Significantly increased title font size */
+    font-size: 2.8em; /* Adjusted title font size for smaller screens */
     color: #fff;
-    letter-spacing: 3px;
+    letter-spacing: 2px; /* Slightly reduced letter spacing */
     text-transform: uppercase;
-    margin: 0; /* Remove default margins */
+    margin: 0; /* Ensure no default margins */
     text-align: center;
-    line-height: 1.1; /* Reduce line height to compact vertical space */
+    line-height: 0.9; /* Significantly reduced line height to compact vertical space */
   }
 
   .header-container {
     width: 95%;
-    max-width: 1000px; /* Match prestige-header max-width */
+    max-width: 900px; /* Match prestige-header max-width */
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 30px; /* Adjusted space */
-    padding: 15px 0;
+    margin-bottom: 20px; /* Adjusted space */
+    padding: 10px 0; /* Adjusted padding */
     border-radius: 10px;
   }
 
   .menu-section {
     background-color: transparent;
-    border-radius: 20px; /* Adjusted rounding */
-    padding: 10px 15px; /* Adjusted padding */
+    border-radius: 15px; /* Adjusted rounding */
+    padding: 8px 12px; /* Adjusted padding */
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
@@ -73,45 +72,45 @@
   .menu-icon {
     display: flex;
     flex-direction: column;
-    gap: 5px; /* Adjusted gap */
-    width: 30px; /* Adjusted width */
-    height: 25px; /* Adjusted height */
+    gap: 4px; /* Adjusted gap */
+    width: 25px; /* Adjusted width */
+    height: 20px; /* Adjusted height */
   }
 
   .menu-icon div {
     width: 100%;
-    height: 4px; /* Adjusted bar thickness */
+    height: 3px; /* Adjusted bar thickness */
     background-color: white;
     border-radius: 2px;
   }
 
   .dashboard-container {
     width: 95%;
-    max-width: 1000px; /* Match header max-width */
+    max-width: 900px; /* Match header max-width */
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Adjusted space between boxes */
-    margin-bottom: 35px; /* Adjusted space */
+    gap: 15px; /* Adjusted space between boxes */
+    margin-bottom: 30px; /* Adjusted space */
   }
   .dashboard-box {
     background-color: rgba(60, 80, 120, 0.5);
-    border-radius: 18px; /* Adjusted rounded corners */
-    padding: 25px 30px; /* Adjusted padding */
+    border-radius: 15px; /* Adjusted rounded corners */
+    padding: 20px 25px; /* Adjusted padding */
     box-sizing: border-box;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Adjusted shadow */
   }
   .dashboard-box h2 {
     margin-top: 0;
-    margin-bottom: 8px; /* Adjusted space below heading */
-    font-size: 1.5em; /* Adjusted font size for headings */
+    margin-bottom: 6px; /* Adjusted space below heading */
+    font-size: 1.3em; /* Adjusted font size for headings */
     font-weight: normal;
     color: #fff;
   }
   .dashboard-box p {
     margin: 0;
-    font-size: 2.2em; /* Adjusted font size for values */
+    font-size: 1.8em; /* Adjusted font size for values */
     font-weight: bold;
     color: #fff;
   }
@@ -119,12 +118,12 @@
     background-color: #64B5F6;
     color: white;
     border: none;
-    padding: 10px 20px; /* Adjusted padding for buttons */
-    border-radius: 8px; /* Adjusted rounding for buttons */
+    padding: 8px 16px; /* Adjusted padding for buttons */
+    border-radius: 6px; /* Adjusted rounding for buttons */
     cursor: pointer;
-    font-size: 1.1em; /* Adjusted font size */
+    font-size: 1em; /* Adjusted font size */
     font-weight: bold;
-    margin-top: 15px; /* Adjusted space above button */
+    margin-top: 10px; /* Adjusted space above button */
     transition: background-color 0.3s ease;
   }
   .action-button:hover {
@@ -138,24 +137,24 @@
   }
   .dark-mode-toggle {
     background-color: rgba(60, 80, 120, 0.5);
-    border-radius: 30px; /* Adjusted rounding */
-    padding: 20px 25px; /* Adjusted padding */
+    border-radius: 25px; /* Adjusted rounding */
+    padding: 15px 20px; /* Adjusted padding */
     box-sizing: border-box;
     width: 95%;
-    max-width: 1000px; /* Match content max-width */
+    max-width: 900px; /* Match content max-width */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
-    margin-bottom: 90px; /* Enough space for the fixed navigation */
+    margin-bottom: 80px; /* Enough space for the fixed navigation */
     color: #fff;
-    font-size: 1.2em; /* Adjusted font size */
+    font-size: 1.1em; /* Adjusted font size */
   }
   .toggle-switch {
     position: relative;
     display: inline-block;
-    width: 55px; /* Adjusted switch size */
-    height: 28px; /* Adjusted switch size */
+    width: 50px; /* Adjusted switch size */
+    height: 25px; /* Adjusted switch size */
   }
   .toggle-switch input {
     opacity: 0;
@@ -176,10 +175,10 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 22px; /* Adjusted handle size */
-    width: 22px; /* Adjusted handle size */
-    left: 3px;
-    bottom: 3px;
+    height: 20px; /* Adjusted handle size */
+    width: 20px; /* Adjusted handle size */
+    left: 2.5px;
+    bottom: 2.5px;
     background-color: white;
     transition: .4s;
     border-radius: 50%;
@@ -188,7 +187,7 @@
     background-color: #64B5F6;
   }
   input:checked + .slider:before {
-    transform: translateX(27px); /* Adjusted for switch size */
+    transform: translateX(25px); /* Adjusted for switch size */
   }
 
   /* Bottom navigation */
@@ -201,8 +200,8 @@
     color: white;
     display: flex;
     justify-content: space-around;
-    padding: 12px 0; /* Adjusted padding */
-    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
+    padding: 10px 0; /* Adjusted padding */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
     z-index: 1000;
   }
   .bottom-navigation a {
@@ -212,23 +211,23 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
-    padding: 8px 0; /* Adjusted padding */
+    padding: 6px 0; /* Adjusted padding */
     transition: background-color 0.3s ease;
   }
   .bottom-navigation a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 6px; /* Adjusted rounding */
+    border-radius: 5px; /* Adjusted rounding */
   }
   .bottom-navigation a.active {
     color: #64B5F6;
   }
   .bottom-navigation a span {
-    font-size: 0.9em; /* Adjusted font size for nav text */
-    margin-top: 8px; /* Adjusted space above text */
+    font-size: 0.85em; /* Adjusted font size for nav text */
+    margin-top: 6px; /* Adjusted space above text */
   }
   .bottom-navigation svg {
-    width: 28px; /* Adjusted icon size */
-    height: 28px; /* Adjusted icon size */
+    width: 25px; /* Adjusted icon size */
+    height: 25px; /* Adjusted icon size */
     stroke: currentColor;
   }
 
@@ -243,14 +242,14 @@
   .off-canvas-menu {
     position: fixed;
     top: 0;
-    right: -280px; /* Adjusted width */
-    width: 280px;
+    right: -250px; /* Adjusted width */
+    width: 250px;
     height: 100%;
     background-color: #0A1C3C;
-    box-shadow: -3px 0 12px rgba(0, 0, 0, 0.5);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
     transition: right 0.3s ease-in-out;
     z-index: 1100;
-    padding-top: 70px; /* Adjusted padding at top */
+    padding-top: 60px; /* Adjusted padding at top */
     color: white;
   }
 
@@ -266,12 +265,12 @@
 
   .off-canvas-menu ul li a {
     display: block;
-    padding: 18px 25px; /* Adjusted padding */
+    padding: 15px 20px; /* Adjusted padding */
     color: white;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.2s ease;
-    font-size: 1.1em; /* Adjusted font size */
+    font-size: 1em; /* Adjusted font size */
   }
 
   .off-canvas-menu ul li a:hover {
@@ -280,9 +279,9 @@
 
   .off-canvas-menu .close-btn {
     position: absolute;
-    top: 20px; /* Adjusted position */
-    right: 25px; /* Adjusted position */
-    font-size: 35px; /* Adjusted close button size */
+    top: 15px; /* Adjusted position */
+    right: 20px; /* Adjusted position */
+    font-size: 30px; /* Adjusted close button size */
     cursor: pointer;
     color: white;
   }
@@ -291,30 +290,30 @@
   @media (min-width: 768px) {
     /* Styles for tablets and desktops */
     body {
-      padding-left: 30px;
-      padding-right: 30px;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     .prestige-logo {
-      width: 220px; /* Adjusted logo size on big screens */
+      width: 180px; /* Adjusted logo size on big screens */
     }
 
     .prestige-title {
-      font-size: 3.8em; /* Further increased title size on big screens */
+      font-size: 3.5em; /* Increased title size on big screens */
     }
 
     .dashboard-box h2 {
-      font-size: 1.7em; /* Adjusted heading size on big screens */
+      font-size: 1.5em; /* Adjusted heading size on big screens */
     }
     .dashboard-box p {
-      font-size: 2.5em; /* Adjusted values size on big screens */
+      font-size: 2.2em; /* Adjusted values size on big screens */
     }
     .action-button {
-      font-size: 1.2em; /* Adjusted button size on big screens */
-      padding: 12px 25px;
+      font-size: 1.1em; /* Adjusted button size on big screens */
+      padding: 10px 20px;
     }
     .dark-mode-toggle {
-        font-size: 1.3em; /* Adjusted text for dark mode toggle */
+        font-size: 1.2em; /* Adjusted text for dark mode toggle */
     }
   }
 </style>
