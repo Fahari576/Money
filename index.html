@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Basic styling - customize as needed */
     body {
@@ -9,33 +10,174 @@
       background-image: linear-gradient(to bottom, #7A288A, #5C0011);
       background-size: 100% 100%;
       background-attachment: fixed;
-      height: 100vh;
+      min-height: 100vh; /* Ensure body takes at least full viewport height */
       margin: 0;
       color: #fff;
+      display: flex; /* Use flexbox for layout */
+      justify-content: center; /* Center horizontally */
+      align-items: flex-start; /* Align content to the top (prevents pushing off top on small screens) */
+      padding: 10px; /* Greatly reduced padding around the body content */
+      box-sizing: border-box; /* Include padding in the height calculation */
     }
+
+    h1 {
+      font-size: 3rem; /* Even larger heading */
+      margin-bottom: 40px; /* More space below heading */
+      letter-spacing: 1px;
+    }
+
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 15px; /* More space below labels */
+      font-size: 1.4rem; /* Even larger label font */
+      font-weight: bold;
     }
+
     input, select {
       width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
+      padding: 18px; /* Even larger padding for inputs/selects */
+      margin-bottom: 30px; /* More space below inputs/selects */
       box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 10px; /* More rounded corners */
+      font-size: 1.3rem; /* Even larger text inside inputs/selects */
+      background-color: rgba(255, 255, 255, 0.98); /* Almost opaque white background */
+      color: #333;
     }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 20px center; /* Adjusted for larger padding */
+        background-size: 26px; /* Larger arrow */
+        padding-right: 50px; /* More space for the custom arrow */
+    }
+
     .flag {
-      width: 20px;
-      height: 15px;
+      width: 35px; /* Max flag size */
+      height: 25px;
       vertical-align: middle;
-      margin-right: 5px;
+      margin-right: 12px;
     }
+
     #registrationForm {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-      width: 50%;
-      margin: 50px auto;
+      background-color: rgba(0, 0, 0, 0.85); /* Even more opaque background for form */
+      padding: 50px; /* Significantly increased padding inside the form */
+      border-radius: 25px; /* Even more rounded corners */
+      width: 98%; /* Take almost full width on most screens */
+      max-width: 700px; /* Allow it to be quite large on desktops */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
+      box-sizing: border-box;
+      margin-top: 10px; /* Slight margin from the very top */
+      margin-bottom: 10px; /* Slight margin from the very bottom */
     }
+
+    button {
+      width: 100%;
+      padding: 20px; /* Even larger padding for buttons */
+      margin-top: 30px; /* More space above buttons */
+      border: none;
+      border-radius: 10px; /* More rounded corners for buttons */
+      font-size: 1.5rem; /* Even larger font size for buttons */
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+      transform: translateY(-3px); /* More pronounced lift on hover */
+    }
+
+    button[type="button"] {
+      background-color: #6c757d;
+      color: white;
+      margin-top: 20px; /* Adjust space between buttons */
+    }
+
+    button[type="button"]:hover {
+      background-color: #5a6268;
+      transform: translateY(-3px);
+    }
+
+    /* Media Queries for responsiveness */
+
+    /* For very small screens (e.g., older phones in portrait) */
+    @media (max-width: 480px) {
+        body {
+            padding: 5px; /* Minimal padding */
+            align-items: flex-start; /* Crucial for pushing content to the top */
+        }
+        #registrationForm {
+            width: 100%; /* Take full width */
+            padding: 20px; /* Reduced internal padding */
+            border-radius: 0; /* Remove border-radius to hug edges */
+            margin-top: 0; /* No top margin */
+            margin-bottom: 0; /* No bottom margin */
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        input, select {
+            padding: 14px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 16px;
+            font-size: 1.3rem;
+            margin-top: 25px;
+            border-radius: 5px;
+        }
+    }
+
+    /* For typical phone screens (more aggressive filling) */
+    @media (min-width: 481px) and (max-width: 768px) {
+        body {
+            padding: 10px;
+            align-items: flex-start; /* Keeps content high */
+        }
+        #registrationForm {
+            width: 98%;
+            padding: 35px;
+            border-radius: 15px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        h1 {
+            font-size: 2.8rem;
+        }
+    }
+
+    /* For tablets and larger desktops (maintain large size) */
+    @media (min-width: 769px) {
+        body {
+            align-items: center; /* Can re-center on larger screens if desired */
+        }
+        #registrationForm {
+            width: 90%; /* Adjust as needed for aesthetic on large screens */
+            max-width: 750px; /* Allow it to be even wider */
+            padding: 60px; /* Max padding */
+        }
+        h1 {
+            font-size: 3.5rem;
+        }
+    }
+
   </style>
 </head>
 <body>
@@ -44,10 +186,13 @@
     <form id="register-form">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
+
       <label for="fullname">Full Name:</label>
       <input type="text" id="fullname" name="fullname" required>
+
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
+
       <label for="country">Country:</label>
       <select id="country" name="country" required>
         <option value="">Select Country</option>
@@ -55,35 +200,71 @@
         <option value="Uganda">Uganda</option>
         <option value="Tanzania">Tanzania</option>
         <option value="Somalia">Somalia</option>
-        <!-- ... more countries ... -->
-      </select>
+        </select>
+
       <label for="phoneCode">Phone Code:</label>
       <select id="phoneCode" name="phoneCode" required>
         <option value="+254">+254 (Kenya)</option>
         <option value="+256">+256 (Uganda)</option>
         <option value="+255">+255 (Tanzania)</option>
         <option value="+252">+252 (Somalia)</option>
-        <!-- Add more country codes as needed -->
-      </select>
+        </select>
+
       <label for="phoneNumber">Phone Number:</label>
       <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
+
       <label for="confirmPassword">Confirm Password:</label>
       <input type="password" id="confirmPassword" name="confirmPassword" required>
-      <label for="welcomedBy">Welcomed By:</label>
+
+      <label for="welcomedBy">Welcomed By (Optional):</label>
       <input type="text" id="welcomedBy" name="welcomedBy">
+
       <button type="submit">Register</button>
       <button type="button" onclick="window.location.href='login.html'">Login</button>
     </form>
     <script>
       document.getElementById('register-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (document.getElementById('password').value !== document.getElementById('confirmPassword').value) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
           alert('Passwords do not match!');
         } else {
+          // In a real application, you'd send this data to a server
+          // For now, we'll just redirect
           window.location.href = 'dashboard.html';
         }
+      });
+
+      // Optional: Add logic to update phone code based on country selection
+      document.getElementById('country').addEventListener('change', function() {
+          const country = this.value;
+          const phoneCodeSelect = document.getElementById('phoneCode');
+          // Reset phone code options
+          phoneCodeSelect.innerHTML = '';
+
+          // Add options based on country
+          if (country === 'Kenya') {
+              phoneCodeSelect.innerHTML += '<option value="+254">+254 (Kenya)</option>';
+          } else if (country === 'Uganda') {
+              phoneCodeSelect.innerHTML += '<option value="+256">+256 (Uganda)</option>';
+          } else if (country === 'Tanzania') {
+              phoneCodeSelect.innerHTML += '<option value="+255">+255 (Tanzania)</option>';
+          } else if (country === 'Somalia') {
+              phoneCodeSelect.innerHTML += '<option value="+252">+252 (Somalia)</option>';
+          } else {
+              // Default or all options if no specific country is selected
+              phoneCodeSelect.innerHTML += `
+                  <option value="+254">+254 (Kenya)</option>
+                  <option value="+256">+256 (Uganda)</option>
+                  <option value="+255">+255 (Tanzania)</option>
+                  <option value="+252">+252 (Somalia)</option>
+              `;
+          }
       });
     </script>
   </div>
