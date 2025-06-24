@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    /* ... (Your existing CSS here, no changes needed to CSS for functionality) ... */
+    /* Add basic styling for status messages */
+    #statusMessage {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        display: none; /* Hidden by default */
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+  <div id="registrationForm">
+    <h1 style="text-align: center;">Create Your Account</h1>
+    <form id="register-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="fullname">Full Name:</label>
+      <input type="text" id="fullname" name="fullname" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="country">Country:</label>
+      <select id="country" name="country" required>
+        <option value="">Select Country</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Uganda">Uganda</option>
+        <option value="Tanzania">Tanzania</option>
+        <option value="Somalia">Somalia</option>
+        </select>
+
+      <label for="phoneCode">Phone Code:</label>
+      <select id="phoneCode" name="phoneCode" required>
+        <option value="+254">+254 (Kenya)</option>
+        <option value="+256">+256 (Uganda)</option>
+        <option value="+255">+255 (Tanzania)</option>
+        <option value="+252">+252 (Somalia)</option>
+        </select>
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+      <label for="welcomedBy">Welcomed By (Optional):</label>
+      <input type="text" id="welcomedBy" name="welcomedBy">
+
+      <button type="submit">Register</button>
+      <button type="button" onclick="window.location.href='login.html'">Login</button>
+    </form>
+    <div id="statusMessage"></div>
+    <script>
+        // --- Supabase Initialization ---
+        // REPLACE WITH YOUR ACTUAL SUPABASE URL AND ANON KEY
+        const SUPABASE_URL = 'https://xheebwpgxkhbhycajeqb.supabase.co'; // Your URL
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoZWVid3BneGtoYmh5Y2FqZXFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3Mzg0NTgsImV4cCI6MjA2NjMxNDQ1OH0.P1g7QWS1jWCf13z6TQRw2MGAKr9mRoM08XiXGcokDdk'; // Your Anon Key
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Get reference to the status message div
+        const statusMessageDiv = document.getElementById('statusMessage');
+
+        function showStatusMessage(message, type) {
+            statusMessageDiv.textContent = message;
+            statusMessageDiv.className = `status ${type}`; // Apply success or error class
+            statusMessageDiv.style.display = 'block'; // Make it visible
+            setTimeout(() => {
+                statusMessageDiv.style.display = 'none'; // Hide after a few seconds
+            }, 5000);
+        }
+
+        document.getElementById('register-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById('username').value;
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const country = document.getElementById('country').value;
+            const phoneCode = document.getElementById('phoneCode').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const welcomedBy = document.getElementById('welcomedBy').value;
+
+            // 1. Client-side Password Validation
+            if (password !== confirmPassword) {
+                showStatusMessage('Passwords do not match!', 'error');
+                return; // Stop execution
+            }
+
+            // 2. Supabase User Authentication (Creates user in auth.users table)
+            const { data: authData, error: authError } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    // You can optionally pass user metadata here,
+                    // but it's often better to store main profile data in a separate table (like Prestige)
+                    // data: {
+                    //     username: username,
+                    //     fullname: fullname,
+                    //     country: country,
+                    //     phone: phoneCode + phoneNumber,
+                    // }
+                }
+            });
+
+            if (authError) {
+                console.error('Supabase Sign Up Error:', authError.message);
+                showStatusMessage(`Registration failed: ${authError.message}`, 'error');
+                return; // Stop if auth fails
+            }
+
+            // Handle email confirmation scenario vs direct login
+            if (authData.user && authData.user.identities && authData.user.identities.length === 0) {
+                // This typically means email confirmation is required and user is not yet logged in.
+                showStatusMessage('Registration successful! Please check your email to confirm your account and then log in.', 'success');
+                // You might want to redirect to a 'check email' page or login page here.
+                document.getElementById('register-form').reset(); // Clear form
+                return;
+            }
+
+            // 3. Store additional profile data in your 'Prestige' table
+            // This part runs if signup was successful AND the user is logged in (e.g., email confirmation not required, or auto-logged in)
+            if (authData.user) {
+                const { data: prestigeData, error: prestigeError } = await supabase
+                    .from('Prestige') // Ensure 'Prestige' is the correct table name
+                    .insert([
+                        {
+                            user_id: authData.user.id, // Link to the Supabase Auth user ID
+                            email: email, // Store email in Prestige table
+                            username: username,
+                            fullname: fullname,
+                            country: country,
+                            phone_code: phoneCode,
+                            phone_number: phoneNumber,
+                            welcomed_by: welcomedBy || null, // Store null if optional field is empty
+                            // Set initial values for other columns as per your table design
+                            amount: 0,
+                            deposit: 0,
+                            withdrawals: 0,
+                            date: new Date().toISOString(), // Current timestamp
+                            package: 'basic', // Default package for new users
+                            user_approval: 'pending', // Initial status
+                            user_data: 'New user registration from website',
+                        }
+                    ]);
+
+                if (prestigeError) {
+                    console.error('Error inserting into Prestige table:', prestigeError.message);
+                    // Crucial: If Prestige insert fails but user is created, handle this.
+                    // You might want to delete the user from Supabase Auth or mark them for review.
+                    showStatusMessage(`Registration complete, but error saving profile details: ${prestigeError.message}. Please contact support.`, 'error');
+                    // Optionally, log out the user if profile save is critical
+                    await supabase.auth.signOut();
+                } else {
+                    console.log('User registered and profile saved:', authData, prestigeData);
+                    showStatusMessage('Registration successful! Redirecting to dashboard...', 'success');
+                    document.getElementById('register-form').reset(); // Clear form
+                    // Redirect to dashboard.html after successful registration and data storage
+                    window.location.href = 'dashboard.html';
+                }
+            } else {
+                // This block should ideally not be hit if authData.user is null,
+                // as that scenario is handled by the email confirmation check above.
+                showStatusMessage('An unexpected error occurred during registration. Please try again.', 'error');
+            }
+        });
+
+        // Optional: Add logic to update phone code based on country selection
+        // Keep your existing logic for this
+        document.getElementById('country').addEventListener('change', function() {
+            const country = this.value;
+            const phoneCodeSelect = document.getElementById('phoneCode');
+            phoneCodeSelect.innerHTML = ''; // Reset options
+
+            // Add options based on country
+            if (country === 'Kenya') {
+                phoneCodeSelect.innerHTML += '<option value="+254">+254 (Kenya)</option>';
+            } else if (country === 'Uganda') {
+                phoneCodeSelect.innerHTML += '<option value="+256">+256 (Uganda)</option>';
+            } else if (country === 'Tanzania') {
+                phoneCodeSelect.innerHTML += '<option value="+255">+255 (Tanzania)</option>';
+            } else if (country === 'Somalia') {
+                phoneCodeSelect.innerHTML += '<option value="+252">+252 (Somalia)</option>';
+            } else {
+                // Default or all options if no specific country is selected
+                phoneCodeSelect.innerHTML += `
+                    <option value="+254">+254 (Kenya)</option>
+                    <option value="+256">+256 (Uganda)</option>
+                    <option value="+255">+255 (Tanzania)</option>
+                    <option value="+252">+252 (Somalia)</option>
+                `;
+            }
+        });
+    </script>
+  </div>
+</body>
+</html>

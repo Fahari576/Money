@@ -1,0 +1,48 @@
+<style>
+  body {
+    font-family: sans-serif;
+    background-image: linear-gradient(to bottom, #7A288A, #5C0011);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+  }
+  #loginForm {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 50px auto;
+    color: #fff;
+  }
+  #loginForm label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  #loginForm input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  #loginForm button {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+
+<div id="loginForm">
+  <h1 style="text-align: center;">Login to Your Account</h1>
+  <form method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Login</button>
+  </form>
+</div>
