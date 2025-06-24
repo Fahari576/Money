@@ -69,6 +69,16 @@
       document.getElementById('earnings').innerText = `Your earnings: ${earnings}`;
       document.getElementById('notification').style.display = 'block';
       document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned ${earnings}ksh`;
+
+      // Store the earnings value in local storage
+      const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
+      if (storedWhatsappEarnings) {
+        const newEarnings = parseInt(storedWhatsappEarnings) + earnings;
+        localStorage.setItem('whatsappEarnings', newEarnings);
+      } else {
+        localStorage.setItem('whatsappEarnings', earnings);
+      }
+
       setTimeout(() => {
         document.getElementById('notification').style.display = 'none';
       }, 3000);
