@@ -3,15 +3,21 @@
 <head>
   <title>WhatsApp Screenshot Upload</title>
   <style>
+    /* Add this for consistent box model behavior */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
       font-family: sans-serif;
       margin: 0;
-      padding: 40px;
+      padding: 20px; /* Slightly reduced padding to give more content space */
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center; /* Center content vertically */
       min-height: 100vh;
     }
 
@@ -20,29 +26,46 @@
       padding: 40px;
       border-radius: 10px;
       text-align: center;
-      width: 80%;
-      max-width: 600px;
+      width: 95%; /* Increased width */
+      max-width: 900px; /* Increased max-width for larger screens */
+      margin-bottom: 20px; /* Add some space below the container */
     }
 
-    input[type="file"], input[type="number"] {
-      width: 80%;
-      padding: 15px;
+    h1 {
+      margin-bottom: 25px; /* Add some space below the heading */
+    }
+
+    input[type="file"],
+    input[type="number"] {
+      width: 90%; /* Increased width within the container */
+      padding: 18px; /* Slightly increased padding for better touch targets */
       margin: 15px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       background-color: #333;
       color: white;
-      font-size: 18px;
+      font-size: 19px; /* Slightly increased font size */
+    }
+
+    label {
+        font-size: 1.1em; /* Make the label slightly larger */
+        margin-bottom: 5px; /* Space between label and input */
+        display: block; /* Make label take its own line */
     }
 
     button {
       background-color: #4CAF50;
       color: white;
-      padding: 15px 30px;
+      padding: 18px 35px; /* Slightly increased padding */
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px; /* Slightly increased font size */
+      margin-top: 20px; /* Space above the button */
+    }
+
+    button:hover {
+        background-color: #45a049; /* Darker green on hover */
     }
 
     #notification {
@@ -53,11 +76,14 @@
       display: none;
       margin-bottom: 20px;
       font-size: 18px;
+      width: 95%; /* Match container width */
+      max-width: 900px; /* Match container max-width */
     }
 
     #earnings {
-      font-size: 24px;
+      font-size: 26px; /* Slightly larger earnings text */
       font-weight: bold;
+      margin-top: 15px; /* Space above earnings text */
       margin-bottom: 10px;
     }
   </style>
@@ -74,11 +100,25 @@
   </div>
   <script>
     document.getElementById('submit').addEventListener('click', () => {
-      const views = document.getElementById('views').value;
+      const viewsInput = document.getElementById('views');
+      const views = parseInt(viewsInput.value); // Convert to integer
+      const screenshotFile = document.getElementById('screenshot').files[0];
+
+      if (isNaN(views) || views <= 0) {
+        alert('Please enter a valid number of views greater than 0.');
+        return;
+      }
+
+      if (!screenshotFile) {
+        alert('Please upload a screenshot.');
+        return;
+      }
+
       const earnings = views * 100;
-      document.getElementById('earnings').innerText = `Your earnings: ${earnings}`;
+      document.getElementById('earnings').innerText = `Your estimated earnings: KES ${earnings}`;
       document.getElementById('notification').style.display = 'block';
-      document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned ${earnings}ksh`;
+      document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned KES ${earnings}.`;
+
       // Store the earnings value in local storage
       const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
       if (storedWhatsappEarnings) {
@@ -87,6 +127,11 @@
       } else {
         localStorage.setItem('whatsappEarnings', earnings);
       }
+
+      // Clear input fields after submission
+      viewsInput.value = '';
+      document.getElementById('screenshot').value = ''; // Clear file input
+
       setTimeout(() => {
         document.getElementById('notification').style.display = 'none';
       }, 3000);
