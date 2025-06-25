@@ -7,46 +7,56 @@
       background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
       font-family: sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 40px;
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
+
     .container {
       background-color: rgba(0, 0, 0, 0.5);
-      padding: 30px;
+      padding: 40px;
       border-radius: 10px;
       text-align: center;
+      width: 80%;
+      max-width: 600px;
     }
+
     input[type="file"], input[type="number"] {
       width: 80%;
-      padding: 10px;
-      margin: 10px 0;
+      padding: 15px;
+      margin: 15px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       background-color: #333;
       color: white;
+      font-size: 18px;
     }
+
     button {
       background-color: #4CAF50;
       color: white;
-      padding: 10px 20px;
+      padding: 15px 30px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 18px;
     }
+
     #notification {
       background-color: #4CAF50;
       color: white;
-      padding: 10px;
+      padding: 15px;
       border-radius: 5px;
       display: none;
       margin-bottom: 20px;
-    }
-    #earnings {
       font-size: 18px;
+    }
+
+    #earnings {
+      font-size: 24px;
       font-weight: bold;
       margin-bottom: 10px;
     }
@@ -69,7 +79,6 @@
       document.getElementById('earnings').innerText = `Your earnings: ${earnings}`;
       document.getElementById('notification').style.display = 'block';
       document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned ${earnings}ksh`;
-
       // Store the earnings value in local storage
       const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
       if (storedWhatsappEarnings) {
@@ -78,7 +87,6 @@
       } else {
         localStorage.setItem('whatsappEarnings', earnings);
       }
-
       setTimeout(() => {
         document.getElementById('notification').style.display = 'none';
       }, 3000);
