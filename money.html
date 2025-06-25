@@ -1,457 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>M-Pesa Withdrawal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #1A2A4E, #0A1C3C); /* Match dashboard background */
-    min-height: 100vh;
-    margin: 0;
-    color: #333; /* Default text color for the light card */
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
-    padding-bottom: 80px; /* Space for bottom nav */
-    box-sizing: border-box;
-  }
+  <title>WhatsApp Screenshot Upload</title>
+  <style>
+    body {
+      background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 40px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  .container {
-    width: 95%;
-    max-width: 600px; /* Max width for the content area */
-    background-color: #f8f8f8; /* Light background for the main card */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .back-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #555;
-    padding: 5px;
-    margin-right: 10px;
-  }
-
-  .header-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
-  }
-
-  .mpesa-logo {
-    display: block;
-    width: 150px; /* Adjust as needed */
-    height: auto;
-    margin: 25px auto; /* Center the logo with vertical spacing */
-  }
-
-  .section-title {
-    font-size: 1.2em;
-    color: #007bff; /* Blue color for links/titles */
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .balance-card {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 25px;
-    text-align: center;
-  }
-
-  .balance-card p {
-    margin: 0;
-    font-size: 1em;
-    color: #555;
-  }
-
-  .balance-card span {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-top: 5px;
-  }
-
-  .input-group {
-    margin-bottom: 20px;
-  }
-
-  .input-group input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    box-sizing: border-box;
-  }
-
-  .min-withdrawal {
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 5px;
-    text-align: left;
-  }
-
-  .withdraw-button {
-    background-color: #007bff; /* Blue button */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-
-  .withdraw-button:hover {
-    background-color: #0056b3;
-  }
-
-  .withdrawal-history-title {
-    font-size: 1.3em;
-    color: #333;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  /* Styling for withdrawal history table */
-  .withdrawal-history-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background-color: #ffffff; /* White background for the table */
-    border-radius: 8px;
-    overflow: hidden; /* Ensures rounded corners are applied to content */
-  }
-  .withdrawal-history-table th, .withdrawal-history-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-    font-size: 0.9em;
-  }
-  .withdrawal-history-table th {
-    background-color: #f2f2f2;
-    color: #555;
-    font-weight: bold;
-  }
-  .withdrawal-history-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  .withdrawal-history-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  .withdrawal-history-table .no-records {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-  }
-
-  /* CSS for the green 'Succeed' status */
-  .status-succeed {
-      color: #28a745 !important; /* Green color with !important to ensure it overrides other styles */
-      font-weight: bold;
-  }
-
-  /* Green Notification Message */
-  .notification {
-    background-color: #4CAF50; /* Green */
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    display: none; /* Hidden by default */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-  .notification.show {
-    display: block;
-    opacity: 1;
-  }
-
-
-  /* Bottom navigation (copied from your dashboard, ensure consistency) */
-  .bottom-navigation {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #0A1C3C; /* Match dashboard bottom nav */
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-  }
-  .bottom-navigation a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    padding: 6px 0;
-    transition: background-color 0.3s ease;
-  }
-  .bottom-navigation a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-  }
-  .bottom-navigation a.active {
-    color: #64B5F6;
-  }
-  .bottom-navigation a span {
-    font-size: 0.85em;
-    margin-top: 6px;
-  }
-  .bottom-navigation svg {
-    width: 25px;
-    height: 25px;
-    stroke: currentColor;
-  }
-
-  /* Media Queries for responsiveness */
-  @media (max-width: 480px) {
     .container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    input[type="file"], input[type="number"] {
+      width: 80%;
       padding: 15px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      font-size: 18px;
     }
-    .mpesa-logo {
-      width: 120px;
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
     }
-    .balance-card span {
-      font-size: 1.5em;
+
+    #notification {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+      margin-bottom: 20px;
+      font-size: 18px;
     }
-    .withdraw-button {
-      padding: 10px 20px;
-      font-size: 1em;
+
+    #earnings {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .withdrawal-history-table th, .withdrawal-history-table td {
-      padding: 8px;
-      font-size: 0.8em;
-    }
-  }
-</style>
+  </style>
 </head>
 <body>
-
-  <div class="notification" id="withdrawalNotification"></div>
-
+  <div id="notification"></div>
   <div class="container">
-    <div class="header">
-      <button class="back-button" onclick="window.location.href='dashboard.html'">&#8592;</button>
-      <span class="header-title">Withdrawal</span>
-    </div>
-
-    <img src="mpesa-logo.png" alt="M-Pesa Logo" class="mpesa-logo">
-
-    <h2 class="section-title">WhatsApp</h2>
-
-    <div class="balance-card">
-      <p>Current Balance:</p>
-      <span id="currentBalance">0 KES</span>
-    </div>
-
-    <div class="input-group">
-      <input type="number" id="withdrawalAmount" placeholder="Enter amount to withdraw">
-      <p class="min-withdrawal">Minimum withdrawal amount is 1000 Ksh.</p>
-    </div>
-
-    <button class="withdraw-button">WITHDRAW</button>
-
-    <h3 class="withdrawal-history-title">Withdrawal History</h3>
-    <div class="withdrawal-history-container">
-      <table class="withdrawal-history-table" id="withdrawalHistoryTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Amount (KES)</th>
-            <th>Date & Time</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          </tbody>
-      </table>
-      <p class="no-records" id="noRecordsMessage" style="display: none;">No withdrawal history yet.</p>
-    </div>
-
+    <h1>Upload WhatsApp Screenshot</h1>
+    <input type="file" id="screenshot" accept="image/*">
+    <label for="views">Number of Views:</label>
+    <input type="number" id="views">
+    <p id="earnings"></p>
+    <button id="submit">Upload & Process</button>
   </div>
-
-  <div class="bottom-navigation">
-    <a href="dashboard.html" class="nav-link" data-name="home">
-      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-      <span>Home</span>
-    </a>
-    <a href="mpesa-payment.html" class="nav-link" data-name="deposit">
-      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
-      <span>Deposit</span>
-    </a>
-    <a href="mpesa-withdrawal.html" class="nav-link active" data-name="withdraw">
-      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
-      <span>Withdraw</span>
-    </a>
-    <a href="profile.html" class="nav-link" data-name="profile">
-      <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
-      <span>Profile</span>
-    </a>
-  </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const currentBalanceSpan = document.getElementById('currentBalance');
-    const withdrawalAmountInput = document.getElementById('withdrawalAmount');
-    const withdrawButton = document.querySelector('.withdraw-button');
-    const withdrawalNotification = document.getElementById('withdrawalNotification');
-    const withdrawalHistoryTableBody = document.querySelector('#withdrawalHistoryTable tbody');
-    const noRecordsMessage = document.getElementById('noRecordsMessage');
-
-    // Function to retrieve WhatsApp Earnings from localStorage
-    function getWhatsappEarnings() {
+  <script>
+    document.getElementById('submit').addEventListener('click', () => {
+      const views = document.getElementById('views').value;
+      const earnings = views * 100;
+      document.getElementById('earnings').innerText = `Your earnings: ${earnings}`;
+      document.getElementById('notification').style.display = 'block';
+      document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned ${earnings}ksh`;
+      // Store the earnings value in local storage
       const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
-      return parseFloat(storedWhatsappEarnings) || 0;
-    }
-
-    // Function to update the displayed balance
-    function updateBalanceDisplay() {
-      currentBalanceSpan.textContent = `${getWhatsappEarnings()} KES`;
-    }
-
-    // Function to get withdrawal history from localStorage
-    function getWithdrawalHistory() {
-      const history = localStorage.getItem('withdrawalHistory');
-      return history ? JSON.parse(history) : [];
-    }
-
-    // Function to save withdrawal history to localStorage
-    function saveWithdrawalHistory(history) {
-      localStorage.setItem('withdrawalHistory', JSON.stringify(history));
-    }
-
-    // Function to render withdrawal history table
-    function renderWithdrawalHistory() {
-      const history = getWithdrawalHistory();
-      withdrawalHistoryTableBody.innerHTML = ''; // Clear existing rows
-
-      // Filter to only show "Succeed" statuses
-      const succeededHistory = history.filter(record => record.status === 'Succeed');
-
-      if (succeededHistory.length === 0) {
-        noRecordsMessage.style.display = 'block';
-        withdrawalHistoryTableBody.style.display = 'none'; // Hide table body if no records
+      if (storedWhatsappEarnings) {
+        const newEarnings = parseInt(storedWhatsappEarnings) + earnings;
+        localStorage.setItem('whatsappEarnings', newEarnings);
       } else {
-        noRecordsMessage.style.display = 'none';
-        withdrawalHistoryTableBody.style.display = 'table-row-group'; // Show table body
-        succeededHistory.forEach((record, index) => {
-          const row = withdrawalHistoryTableBody.insertRow();
-          row.insertCell().textContent = index + 1; // ID
-          row.insertCell().textContent = record.amount;
-          row.insertCell().textContent = record.timestamp;
-          
-          const statusCell = row.insertCell();
-          statusCell.textContent = record.status;
-          // Apply green color if status is "Succeed"
-          statusCell.classList.add('status-succeed');
-        });
+        localStorage.setItem('whatsappEarnings', earnings);
       }
-    }
-
-    // Initial display update
-    updateBalanceDisplay();
-    renderWithdrawalHistory();
-
-    // Handle withdrawal
-    withdrawButton.addEventListener('click', function() {
-      let whatsappEarnings = getWhatsappEarnings();
-      const amountToWithdraw = parseFloat(withdrawalAmountInput.value);
-      const minWithdrawal = 1000;
-
-      // Hide any previous notification
-      withdrawalNotification.classList.remove('show');
-
-      if (isNaN(amountToWithdraw) || amountToWithdraw <= 0) {
-        alert('Please enter a valid amount to withdraw.');
-        return;
-      }
-
-      if (amountToWithdraw < minWithdrawal) {
-        alert(`Minimum withdrawal amount is ${minWithdrawal} KES.`);
-        return;
-      }
-
-      if (amountToWithdraw > whatsappEarnings) {
-        alert('Insufficient balance.');
-        return;
-      }
-
-      // Simulate successful withdrawal
-      whatsappEarnings -= amountToWithdraw;
-      localStorage.setItem('whatsappEarnings', whatsappEarnings); // Update localStorage
-
-      // Update total withdrawal (this is the part that reflects on dashboard)
-      let totalWithdrawn = parseFloat(localStorage.getItem('totalWithdrawn')) || 0;
-      totalWithdrawn += amountToWithdraw;
-      localStorage.setItem('totalWithdrawn', totalWithdrawn);
-
-      updateBalanceDisplay(); // Update displayed balance
-
-      // Add to withdrawal history with "Succeed" status
-      const now = new Date();
-      const timestamp = now.toLocaleString('en-GB', {
-          year: 'numeric', month: '2-digit', day: '2-digit',
-          hour: '2-digit', minute: '2-digit', second: '2-digit'
-      });
-      const history = getWithdrawalHistory();
-      history.push({
-        amount: amountToWithdraw,
-        timestamp: timestamp,
-        status: 'Succeed' // Always set to Succeed
-      });
-      saveWithdrawalHistory(history);
-      renderWithdrawalHistory(); // Re-render the table
-
-      // Show success notification
-      withdrawalNotification.textContent = `Congratulations! Your withdrawal of ${amountToWithdraw} KES has been sent to your MPESA account.`;
-      withdrawalNotification.classList.add('show');
-
-      // Optionally hide notification after a few seconds
       setTimeout(() => {
-        withdrawalNotification.classList.remove('show');
-      }, 5000); // Hide after 5 seconds
-
-      withdrawalAmountInput.value = ''; // Clear input field
+        document.getElementById('notification').style.display = 'none';
+      }, 3000);
     });
-
-    // Highlight active navigation link
-    const navLinks = document.querySelectorAll('.bottom-navigation .nav-link');
-    const currentPageName = 'withdraw'; // This page is for withdrawal
-    navLinks.forEach(link => {
-        if (link.dataset.name === currentPageName) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
