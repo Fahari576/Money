@@ -3,69 +3,81 @@
 <head>
   <title>WhatsApp Screenshot Upload</title>
   <style>
-    /* Add this for consistent box model behavior */
-    * {
-      box-sizing: border-box;
+    /* Ensure HTML and Body take full viewport height */
+    html, body {
+      height: 100%; /* Make html and body take full height of the viewport */
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      color: white;
+      display: flex; /* Use flexbox for centering */
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      justify-content: center; /* Center vertically */
+      background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
     }
 
-    body {
-      background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px; /* Slightly reduced padding to give more content space */
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; /* Center content vertically */
-      min-height: 100vh;
+    * {
+      box-sizing: border-box; /* Ensure consistent box model */
     }
 
     .container {
       background-color: rgba(0, 0, 0, 0.5);
-      padding: 40px;
-      border-radius: 10px;
+      padding: 40px; /* Keep good internal padding */
+      border-radius: 10px; /* Keep rounded corners */
       text-align: center;
-      width: 95%; /* Increased width */
-      max-width: 900px; /* Increased max-width for larger screens */
-      margin-bottom: 20px; /* Add some space below the container */
+      width: 95%; /* Take up most of the width */
+      max-width: 500px; /* Adjust max-width for better mobile fit if desired, or remove */
+      min-height: 80vh; /* Make the container take at least 80% of the viewport height */
+      display: flex; /* Use flexbox for internal alignment */
+      flex-direction: column;
+      justify-content: center; /* Center content within the container */
+      align-items: center; /* Center items horizontally within the container */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
     }
 
     h1 {
-      margin-bottom: 25px; /* Add some space below the heading */
+      margin-bottom: 25px;
+      font-size: 1.8em; /* Slightly larger heading */
     }
 
     input[type="file"],
     input[type="number"] {
-      width: 90%; /* Increased width within the container */
-      padding: 18px; /* Slightly increased padding for better touch targets */
+      width: 90%; /* Still wide within the container */
+      padding: 18px;
       margin: 15px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       background-color: #333;
       color: white;
-      font-size: 19px; /* Slightly increased font size */
+      font-size: 19px;
     }
 
     label {
-        font-size: 1.1em; /* Make the label slightly larger */
-        margin-bottom: 5px; /* Space between label and input */
-        display: block; /* Make label take its own line */
+        font-size: 1.1em;
+        margin-bottom: 5px;
+        display: block;
+        align-self: flex-start; /* Align label to the left if items are centered */
+        width: 90%; /* Match input width */
+        text-align: left; /* Align text to the left */
     }
+
 
     button {
       background-color: #4CAF50;
       color: white;
-      padding: 18px 35px; /* Slightly increased padding */
+      padding: 18px 35px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 20px; /* Slightly increased font size */
-      margin-top: 20px; /* Space above the button */
+      font-size: 20px;
+      margin-top: 20px;
+      width: 90%; /* Make button also take full width */
+      max-width: 300px; /* Optional: Limit button width on larger screens */
     }
 
     button:hover {
-        background-color: #45a049; /* Darker green on hover */
+        background-color: #45a049;
     }
 
     #notification {
@@ -77,13 +89,14 @@
       margin-bottom: 20px;
       font-size: 18px;
       width: 95%; /* Match container width */
-      max-width: 900px; /* Match container max-width */
+      max-width: 500px; /* Match container max-width */
+      text-align: center;
     }
 
     #earnings {
-      font-size: 26px; /* Slightly larger earnings text */
+      font-size: 26px;
       font-weight: bold;
-      margin-top: 15px; /* Space above earnings text */
+      margin-top: 15px;
       margin-bottom: 10px;
     }
   </style>
