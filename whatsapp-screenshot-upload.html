@@ -3,9 +3,10 @@
 <head>
   <title>WhatsApp Screenshot Upload</title>
   <style>
-    /* Ensure HTML and Body take full viewport height */
+    /* Ensure HTML and Body take full viewport height and width */
     html, body {
       height: 100%; /* Make html and body take full height of the viewport */
+      width: 100%; /* Ensure body takes full width */
       margin: 0;
       padding: 0;
       font-family: sans-serif;
@@ -15,6 +16,7 @@
       align-items: center; /* Center horizontally */
       justify-content: center; /* Center vertically */
       background-image: linear-gradient(to bottom right, #800080, #8A2BE2);
+      overflow-x: hidden; /* Prevent horizontal scrollbar if elements slightly exceed width */
     }
 
     * {
@@ -23,22 +25,22 @@
 
     .container {
       background-color: rgba(0, 0, 0, 0.5);
-      padding: 40px; /* Keep good internal padding */
-      border-radius: 10px; /* Keep rounded corners */
+      padding: 30px 20px; /* Adjusted padding: top/bottom 30px, left/right 20px for edge cases */
+      border-radius: 0; /* Removed border-radius for a truly rectangular, full-width look */
       text-align: center;
-      width: 95%; /* Take up most of the width */
-      max-width: 500px; /* Adjust max-width for better mobile fit if desired, or remove */
-      min-height: 80vh; /* Make the container take at least 80% of the viewport height */
+      width: 100%; /* THIS IS THE KEY CHANGE for full width */
+      max-width: none; /* Remove max-width constraint to allow it to always be 100% */
+      min-height: 100vh; /* Make the container take 100% of the viewport height */
       display: flex; /* Use flexbox for internal alignment */
       flex-direction: column;
       justify-content: center; /* Center content within the container */
       align-items: center; /* Center items horizontally within the container */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+      box-shadow: none; /* Removed shadow if you want it to blend seamlessly */
     }
 
     h1 {
       margin-bottom: 25px;
-      font-size: 1.8em; /* Slightly larger heading */
+      font-size: 1.8em;
     }
 
     input[type="file"],
@@ -57,7 +59,7 @@
         font-size: 1.1em;
         margin-bottom: 5px;
         display: block;
-        align-self: flex-start; /* Align label to the left if items are centered */
+        align-self: flex-start; /* Align label to the left */
         width: 90%; /* Match input width */
         text-align: left; /* Align text to the left */
     }
@@ -88,9 +90,14 @@
       display: none;
       margin-bottom: 20px;
       font-size: 18px;
-      width: 95%; /* Match container width */
-      max-width: 500px; /* Match container max-width */
+      width: 90%; /* Match internal content width */
+      max-width: 450px; /* Limit notification width */
       text-align: center;
+      position: absolute; /* Position notification over content */
+      top: 20px; /* From the top of the viewport */
+      left: 50%;
+      transform: translateX(-50%); /* Center horizontally */
+      z-index: 100; /* Ensure it's on top */
     }
 
     #earnings {
