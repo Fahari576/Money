@@ -25,47 +25,50 @@
 
     .container {
       background-color: rgba(0, 0, 0, 0.5);
-      padding: 50px 30px; /* Increased top/bottom padding for more internal space */
-      border-radius: 0;
+      padding: 50px 20px; /* Ample vertical padding, 20px horizontal for small internal margin */
+      border-radius: 0; /* No rounded corners for full screen look */
       text-align: center;
-      width: 100%;
-      max-width: none;
-      min-height: 100vh;
+      width: 100%; /* Full width */
+      max-width: none; /* No max width limitation */
+      min-height: 100vh; /* Full viewport height */
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      box-shadow: none;
+      justify-content: center; /* Center content vertically */
+      align-items: center; /* Center content horizontally */
+      box-shadow: none; /* No shadow */
     }
 
     h1 {
-      margin-bottom: 35px; /* Increased margin for more space below heading */
-      font-size: 2.2em; /* Significantly larger heading font size */
-      line-height: 1.2; /* Better line spacing for large text */
+      margin-bottom: 40px; /* Increased space below heading */
+      font-size: 2.5em; /* Even larger heading */
+      line-height: 1.2;
+      word-wrap: break-word; /* Ensure long titles wrap */
+      padding: 0 10px; /* Small horizontal padding for heading to prevent touching edges */
     }
 
     input[type="file"],
     input[type="number"] {
-      width: 90%;
-      padding: 22px; /* Increased padding for much larger input fields */
-      margin: 20px 0; /* Increased margin between inputs */
+      width: 95%; /* Make inputs take up almost full width of container */
+      padding: 25px; /* Significantly increased padding for very large touch targets */
+      margin: 25px 0; /* More vertical space between inputs */
       border: 1px solid #ccc;
-      border-radius: 8px; /* Slightly larger border-radius for softer look */
+      border-radius: 10px; /* Larger border-radius for a softer, prominent look */
       background-color: #333;
       color: white;
-      font-size: 24px; /* Significantly larger font size for input text */
+      font-size: 26px; /* Very large font size for input text */
+      text-align: center; /* Center text inside inputs */
     }
 
     /* Style for the 'Choose File' button within the file input */
     input[type="file"]::file-selector-button {
       background-color: #555;
       color: white;
-      padding: 15px 20px; /* Padding for the button part */
+      padding: 18px 25px; /* Larger padding for the button part */
       border: none;
-      border-radius: 5px;
+      border-radius: 8px; /* Slightly rounded corners for the button */
       cursor: pointer;
-      font-size: 20px; /* Larger font size for 'Choose File' text */
-      margin-right: 15px; /* Space between button and file name */
+      font-size: 22px; /* Larger font size for 'Choose File' text */
+      margin-right: 20px; /* More space between button and file name */
       transition: background-color 0.2s ease;
     }
 
@@ -74,26 +77,26 @@
     }
 
     label {
-        font-size: 1.4em; /* Much larger font size for labels */
-        margin-bottom: 10px; /* More space below label */
+        font-size: 1.6em; /* Much larger font size for labels */
+        margin-bottom: 15px; /* More space below label */
         display: block;
-        align-self: flex-start;
-        width: 90%;
-        text-align: left;
+        align-self: flex-start; /* Align label to the left */
+        width: 95%; /* Match input width */
+        text-align: left; /* Align text to the left */
     }
 
 
     button {
       background-color: #4CAF50;
       color: white;
-      padding: 22px 40px; /* Increased padding for a very large button */
+      padding: 25px 50px; /* Significantly increased padding for a massive button */
       border: none;
-      border-radius: 8px; /* Matching border-radius with inputs */
+      border-radius: 10px; /* Matching border-radius with inputs */
       cursor: pointer;
-      font-size: 26px; /* Significantly larger button text */
-      margin-top: 30px; /* More space above the button */
-      width: 90%;
-      max-width: 400px; /* Increased max-width for the button */
+      font-size: 28px; /* Very large button text */
+      margin-top: 40px; /* More space above the button */
+      width: 95%; /* Make button also take almost full width */
+      max-width: 500px; /* Increased max-width for the button */
       transition: background-color 0.2s ease;
     }
 
@@ -104,26 +107,29 @@
     #notification {
       background-color: #4CAF50;
       color: white;
-      padding: 20px; /* Larger padding for notification */
-      border-radius: 8px;
+      padding: 25px; /* Larger padding for notification */
+      border-radius: 10px;
       display: none;
       margin-bottom: 20px;
-      font-size: 22px; /* Larger font size for notification text */
-      width: 90%; /* Match internal content width */
-      max-width: 500px; /* Limit notification width */
+      font-size: 24px; /* Larger font size for notification text */
+      width: 90%; /* Keep notification within reasonable width */
+      max-width: 600px; /* Limit notification width */
       text-align: center;
-      position: absolute;
-      top: 20px;
+      position: absolute; /* Position notification over content */
+      top: 30px; /* From the top of the viewport */
       left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
+      transform: translateX(-50%); /* Center horizontally */
+      z-index: 100; /* Ensure it's on top */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Add subtle shadow to notification */
     }
 
     #earnings {
-      font-size: 32px; /* Much larger earnings text */
+      font-size: 36px; /* Massive earnings text */
       font-weight: bold;
-      margin-top: 25px; /* More space above earnings text */
-      margin-bottom: 15px; /* More space below earnings text */
+      margin-top: 30px; /* More space above earnings text */
+      margin-bottom: 20px; /* More space below earnings text */
+      word-wrap: break-word; /* Ensure text wraps if too long */
+      padding: 0 10px; /* Small horizontal padding for earnings text */
     }
   </style>
 </head>
@@ -144,19 +150,19 @@
       const screenshotFile = document.getElementById('screenshot').files[0];
 
       if (isNaN(views) || views <= 0) {
-        alert('Please enter a valid number of views greater than 0.');
+        // Use a custom alert/notification instead of default browser alert for better styling
+        showNotification('Please enter a valid number of views greater than 0.', 'red');
         return;
       }
 
       if (!screenshotFile) {
-        alert('Please upload a screenshot.');
+        showNotification('Please upload a screenshot.', 'red');
         return;
       }
 
       const earnings = views * 100;
       document.getElementById('earnings').innerText = `Your estimated earnings: KES ${earnings}`;
-      document.getElementById('notification').style.display = 'block';
-      document.getElementById('notification').innerText = `Congratulations! Your views have been submitted successfully. You earned KES ${earnings}.`;
+      showNotification(`Congratulations! Your views have been submitted successfully. You earned KES ${earnings}.`, 'green');
 
       // Store the earnings value in local storage
       const storedWhatsappEarnings = localStorage.getItem('whatsappEarnings');
@@ -170,11 +176,23 @@
       // Clear input fields after submission
       viewsInput.value = '';
       document.getElementById('screenshot').value = ''; // Clear file input
+    });
+
+    // Function to show custom notification
+    function showNotification(message, type) {
+      const notification = document.getElementById('notification');
+      notification.innerText = message;
+      notification.style.display = 'block';
+      if (type === 'red') {
+        notification.style.backgroundColor = '#dc3545'; /* Red for errors */
+      } else {
+        notification.style.backgroundColor = '#4CAF50'; /* Green for success */
+      }
 
       setTimeout(() => {
-        document.getElementById('notification').style.display = 'none';
-      }, 3000);
-    });
+        notification.style.display = 'none';
+      }, 4000); // Display for 4 seconds
+    }
   </script>
 </body>
 </html>
