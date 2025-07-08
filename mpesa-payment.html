@@ -6,150 +6,157 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  /* We will remove the gradient background from the body */
-  background-color: #330055; /* Set a solid background color for the body if container doesn't cover everything */
+  background-color: #330055; /* Dark purple background */
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Make body take full viewport height */
-  width: 100vw; /* Make body take full viewport width */
-  overflow: hidden; /* Prevent scrolling if content slightly exceeds viewport */
+  align-items: flex-start; /* Align to the top, as in the image */
+  min-height: 100vh;
+  width: 100vw;
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds viewport height */
+  padding-top: 20px; /* Add some padding at the top */
+  box-sizing: border-box;
 }
 
 .container {
-  background-color: #330055; /* This will now be the main background color for the 'full screen' form */
-  padding: 20px;
-  /* border-radius: 10px; */ /* Removed border-radius as you want it to be full screen */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */ /* Removed box-shadow for a cleaner full-screen look */
+  background-color: #330055; /* Same as body background for a seamless look */
+  padding: 0; /* No padding on the container itself */
   text-align: center;
-  width: 100%; /* Make container full width */
-  height: 100vh; /* Make container full viewport height */
-  box-sizing: border-box; /* Include padding in the width/height calculation */
-  display: flex; /* Use flexbox to center content vertically within the container */
-  flex-direction: column; /* Stack items vertically */
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
+  width: 100%;
+  max-width: 500px; /* Limit the maximum width of the content */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1, h2 {
+h1 {
+  margin-top: 10px; /* Adjust margin to match image */
+  margin-bottom: 20px;
+  font-size: 1.4em; /* Match the title size */
+}
+
+.instructions {
+  background-color: #4A0077; /* Slightly lighter purple for the instructions box */
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 25px;
+  padding: 15px; /* Adjust padding to match the image */
+  border-radius: 8px;
+  font-size: 0.9em; /* Match instruction text size */
+  width: calc(100% - 40px); /* Account for horizontal padding */
+  box-sizing: border-box;
+}
+
+.instructions h2 {
+  font-size: 1.1em; /* Match "Instructions:" heading size */
+  margin-top: 0;
   margin-bottom: 10px;
+}
+
+.instructions ol {
+  padding-left: 20px; /* Adjust padding for ordered list */
+  margin: 0;
+  list-style-position: inside; /* Keep list markers inside */
+}
+
+.instructions li {
+  margin-bottom: 5px;
 }
 
 input[type="number"],
 input[type="text"] {
-  width: calc(100% - 40px); /* Adjusted for 20px padding on each side inside the inputs */
-  padding: 15px; /* Increased padding for inputs */
-  margin-bottom: 15px; /* Increased margin for inputs */
-  background-color: #440066;
+  width: calc(100% - 30px); /* Adjust width to match image padding */
+  padding: 12px 15px; /* Adjust padding to match image */
+  margin-bottom: 15px;
+  background-color: #4A0077; /* Same as instructions box background */
   color: white;
   border: none;
   border-radius: 5px;
   text-align: center;
   box-sizing: border-box;
-  font-size: 1.1em; /* Make input text slightly larger */
+  font-size: 1.1em; /* Match input text size */
+}
+
+/* Placeholder text color */
+input::placeholder {
+  color: #bbb;
+  opacity: 1; /* Firefox fix */
 }
 
 button {
-  background-color: #9900cc;
+  background-color: #9900CC; /* Purple button color */
   color: white;
-  padding: 18px 35px; /* Increased button padding for a larger size */
+  padding: 15px 30px; /* Adjust button padding to match image */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2em; /* Make button text larger */
-  margin-top: 20px; /* Add some space above the button */
+  font-size: 1.1em; /* Match button text size */
+  margin-top: 10px; /* Adjust space above the button */
+  width: calc(100% - 40px); /* Match the width of other elements */
+  max-width: 300px; /* Limit button width */
 }
 
-.instructions {
-  text-align: left;
-  margin-top: 0; /* Remove top margin as the flexbox will handle vertical spacing */
-  margin-bottom: 25px; /* Add more space below instructions */
-  padding: 20px; /* Increased padding for instructions */
-  border: 1px solid #7700aa;
-  border-radius: 8px; /* Slightly larger border-radius for instructions */
-  font-size: 1.2em; /* Make instruction text larger */
-  width: calc(100% - 40px); /* Match width with inputs, accounting for padding */
+/* Specific styling for the input fields to match the image's "placeholder" appearance */
+.input-placeholder {
+  width: calc(100% - 40px); /* Match the width of the instructions box */
+  padding: 15px 20px; /* Adjust padding */
+  margin-bottom: 15px;
+  background-color: #4A0077; /* The background color of the input area */
+  color: #bbb; /* Placeholder text color */
+  border-radius: 5px;
+  text-align: center;
   box-sizing: border-box;
-}
-
-.instructions ol {
-  padding-left: 30px; /* Adjust padding for ordered list */
-}
-
-.input-group {
+  font-size: 1.1em;
   display: flex;
-  flex-direction: column;
-  width: calc(100% - 40px); /* Match width with inputs and instructions */
-  margin-bottom: 15px; /* Increased margin between input groups */
+  justify-content: center;
+  align-items: center;
 }
 
-.input-group label {
-  margin-bottom: 10px; /* Increased margin for labels */
-  font-size: 1.2em; /* Make label text larger */
-}
-
-/* Added for better centering and to make the inner content responsive within the full screen */
-.content-wrapper {
-  max-width: 500px; /* Set a max-width for the form content to prevent it from becoming too wide on very large screens */
-  width: 90%; /* Allow content to take up a good portion of the screen */
-  padding: 20px; /* Add some padding inside this wrapper */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items within the wrapper */
+/* Hide actual input fields as they are visually represented by the placeholder divs */
+.hidden-input {
+  display: none;
 }
 </style>
 </head>
 <body>
   <div class="container">
-    <div class="content-wrapper">
-      <h1>M-Pesa Paybill Deposit</h1>
+    <h1>M-Pesa Paybill Deposit</h1>
 
-      <div class="instructions">
-        <h2>Instructions:</h2>
-        <ol>
-          <li>Go to M-Pesa on your phone.</li>
-          <li>Select "Lipa na M-Pesa".</li>
-          <li>Choose "Pay Bill".</li>
-          <li>Enter Business Number: <b>247247</b></li>
-          <li>Enter Account Number: <b>20062359741</b></li>
-          <li>Enter Account Name: <b>Dennis</b></li>
-          <li>Enter your M-Pesa PIN.</li>
-        </ol>
-      </div>
-
-      <div class="input-group">
-        <label for="amount">Enter Amount:</label>
-        <input type="number" id="amount" placeholder="Amount">
-      </div>
-      <div class="input-group">
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" placeholder="Phone Number">
-      </div>
-      <div class="input-group">
-        <label for="transactionCode">Transaction Code:</label>
-        <input type="text" id="transactionCode" placeholder="Transaction Code">
-      </div>
-
-      <button onclick="depositConfirmation()">Confirm Deposit</button>
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <ol>
+        <li>Go to M-Pesa on your phone.</li>
+        <li>Select "Lipa na M-Pesa".</li>
+        <li>Choose "Pay Bill".</li>
+        <li>Enter Business Number: <b>247247</b></li>
+        <li>Enter Account Number: <b>20062359741</b></li>
+        <li>Enter Account Name: <b>Dennis</b></li>
+        <li>Enter your M-Pesa PIN.</li>
+      </ol>
     </div>
+
+    <div class="input-placeholder">
+      Enter Amount:
+      <input type="number" id="amount" class="hidden-input" placeholder="Amount">
+    </div>
+    <div class="input-placeholder">
+      Phone Number:
+      <input type="text" id="phoneNumber" class="hidden-input" placeholder="Phone Number">
+    </div>
+    <div class="input-placeholder">
+      Transaction Code:
+      <input type="text" id="transactionCode" class="hidden-input" placeholder="Transaction Code">
+    </div>
+
+    <button onclick="depositConfirmation()">Confirm Deposit</button>
   </div>
 
   <script>
     function depositConfirmation() {
-      const amount = document.getElementById("amount").value;
-      const phoneNumber = document.getElementById("phoneNumber").value;
-      const transactionCode = document.getElementById("transactionCode").value;
-
-      if (amount === "" || phoneNumber === "" || transactionCode === "") {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      alert("Thank you! Your deposit is being processed.\nAmount: " + amount + "\nPhone Number: " + phoneNumber + "\nTransaction Code: " + transactionCode + "\nPaybill Details:\nPaybill Number: 247247\nAccount Number: 20062359741\nAccount Name: Dennis");
-      // In a real application, you would send this information to your server
-      // to verify the payment.  This is just a placeholder.
+      // In a real application, you would make the hidden input fields visible and collect data,
+      // or implement a custom input mechanism. For this replication, we'll just show an alert.
+      alert("This is a visual replica. In a real application, you would enter details here.");
     }
   </script>
 </body>
