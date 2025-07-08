@@ -64,18 +64,19 @@ h1 {
   margin-bottom: 5px;
 }
 
+/* Styling for actual input fields */
 input[type="number"],
 input[type="text"] {
-  width: calc(100% - 30px); /* Adjust width to match image padding */
-  padding: 12px 15px; /* Adjust padding to match image */
+  width: calc(100% - 40px); /* Match the width of the instructions box */
+  padding: 15px 20px; /* Adjust padding */
   margin-bottom: 15px;
-  background-color: #4A0077; /* Same as instructions box background */
-  color: white;
+  background-color: #4A0077; /* The background color of the input area */
+  color: white; /* Changed to white for user input */
   border: none;
   border-radius: 5px;
   text-align: center;
   box-sizing: border-box;
-  font-size: 1.1em; /* Match input text size */
+  font-size: 1.1em;
 }
 
 /* Placeholder text color */
@@ -96,27 +97,6 @@ button {
   width: calc(100% - 40px); /* Match the width of other elements */
   max-width: 300px; /* Limit button width */
 }
-
-/* Specific styling for the input fields to match the image's "placeholder" appearance */
-.input-placeholder {
-  width: calc(100% - 40px); /* Match the width of the instructions box */
-  padding: 15px 20px; /* Adjust padding */
-  margin-bottom: 15px;
-  background-color: #4A0077; /* The background color of the input area */
-  color: #bbb; /* Placeholder text color */
-  border-radius: 5px;
-  text-align: center;
-  box-sizing: border-box;
-  font-size: 1.1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Hide actual input fields as they are visually represented by the placeholder divs */
-.hidden-input {
-  display: none;
-}
 </style>
 </head>
 <body>
@@ -136,27 +116,24 @@ button {
       </ol>
     </div>
 
-    <div class="input-placeholder">
-      Enter Amount:
-      <input type="number" id="amount" class="hidden-input" placeholder="Amount">
-    </div>
-    <div class="input-placeholder">
-      Phone Number:
-      <input type="text" id="phoneNumber" class="hidden-input" placeholder="Phone Number">
-    </div>
-    <div class="input-placeholder">
-      Transaction Code:
-      <input type="text" id="transactionCode" class="hidden-input" placeholder="Transaction Code">
-    </div>
+    <input type="number" id="amount" placeholder="Enter Amount">
+    <input type="text" id="phoneNumber" placeholder="Phone Number">
+    <input type="text" id="transactionCode" placeholder="Transaction Code">
 
     <button onclick="depositConfirmation()">Confirm Deposit</button>
   </div>
 
   <script>
     function depositConfirmation() {
-      // In a real application, you would make the hidden input fields visible and collect data,
-      // or implement a custom input mechanism. For this replication, we'll just show an alert.
-      alert("This is a visual replica. In a real application, you would enter details here.");
+      const amount = document.getElementById('amount').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const transactionCode = document.getElementById('transactionCode').value;
+
+      if (amount && phoneNumber && transactionCode) {
+        alert(`Confirming deposit:\nAmount: KES ${amount}\nPhone: ${phoneNumber}\nTransaction Code: ${transactionCode}`);
+      } else {
+        alert("Please fill in all the details.");
+      }
     }
   </script>
 </body>
