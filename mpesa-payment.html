@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MPesa Deposit</title>
+<title>M-Pesa Paybill Deposit</title>
 <style>
 body {
   font-family: sans-serif;
   margin: 0;
-  background: linear-gradient(to bottom, #550088, #880055); /* Mixed purple gradient */
+  background: linear-gradient(to bottom, #550088, #880055);
   color: white;
   display: flex;
   justify-content: center;
@@ -15,56 +15,111 @@ body {
 }
 
 .container {
-  background-color: #330055; /* Darker purple - adjust as needed */
+  background-color: #330055;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-align: center;
+  width: 80%;
+  max-width: 450px; /* Increased max-width for better layout */
 }
 
-input[type="text"],
-input[type="number"] {
-  width: 100%;
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+input[type="number"],
+input[type="text"] { /* Added style for text inputs */
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #440066; /* Darker purple input background */
+  background-color: #440066;
   color: white;
   border: none;
   border-radius: 5px;
+  text-align: center;
 }
 
 button {
-  background-color: #9900cc; /* Lighter purple button - adjust as needed */
+  background-color: #9900cc;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
+
+.instructions {
+  text-align: left;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #7700aa;
+  border-radius: 5px;
+}
+
+.instructions ol {
+  padding-left: 20px;
+}
+
+.input-group { /* Added style for input groups */
+  display: flex;
+  flex-direction: column; /* Stack inputs vertically */
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>purchase via MPESA</h1>
-  <input type="text" placeholder="Phone Number" id="phoneNumber">
-  <input type="number" placeholder="Amount" id="amount">
-  <input type="text" placeholder="Transaction Code" id="transactionCode">
-  <button onclick="submitTransaction()">SUBMIT</button>
-</div>
+  <div class="container">
+    <h1>M-Pesa Paybill Deposit</h1>
 
-<script>
-function submitTransaction() {
-  const phoneNumber = document.getElementById("phoneNumber").value;
-  const amount = document.getElementById("amount").value;
-  const transactionCode = document.getElementById("transactionCode").value;
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <ol>
+        <li>Go to M-Pesa on your phone.</li>
+        <li>Select "Lipa na M-Pesa".</li>
+        <li>Choose "Pay Bill".</li>
+        <li>Enter Business Number: <b>247247</b></li>
+        <li>Enter Account Number: <b>20062359741</b></li>
+        <li>Enter Account Name: <b>Dennis</b></li>
+        <li>Enter your M-Pesa PIN.</li>
+      </ol>
+    </div>
 
-  // **CRITICAL:** Replace this alert with your actual backend communication.
-  // You'll need to use fetch or AJAX to send the data to your server.
-  // The server will then handle the interaction with the MPesa API.
-  alert("Submitting transaction:\nPhone Number: " + phoneNumber + 
-        "\nAmount: " + amount + 
-        "\nTransaction Code: " + transactionCode);
-}
-</script>
+    <div class="input-group">
+      <label for="amount">Enter Amount:</label>
+      <input type="number" id="amount" placeholder="Amount">
+    </div>
+    <div class="input-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" placeholder="Phone Number">
+    </div>
+    <div class="input-group">
+      <label for="transactionCode">Transaction Code:</label>
+      <input type="text" id="transactionCode" placeholder="Transaction Code">
+    </div>
+
+    <button onclick="depositConfirmation()">Confirm Deposit</button>
+  </div>
+
+  <script>
+    function depositConfirmation() {
+      const amount = document.getElementById("amount").value;
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const transactionCode = document.getElementById("transactionCode").value;
+
+      if (amount === "" || phoneNumber === "" || transactionCode === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      alert("Thank you! Your deposit is being processed.\nAmount: " + amount + "\nPhone Number: " + phoneNumber + "\nTransaction Code: " + transactionCode + "\nPaybill Details:\nPaybill Number: 247247\nAccount Number: 20062359741\nAccount Name: Dennis");
+      // In a real application, you would send this information to your server
+      // to verify the payment.  This is just a placeholder.
+    }
+  </script>
 </body>
 </html>
